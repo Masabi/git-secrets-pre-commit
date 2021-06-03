@@ -1,0 +1,23 @@
+-   id: git-secrets-scan
+    name: "Git Secrets: scan files"
+    description: Scans all files that are about to be committed
+    language: docker
+    entry: git secrets --pre_commit_hook
+    always_run: true
+    pass_filenames: false
+    stages: [commit]
+-   id: git-secrets-commit-msg
+    name: "Git Secrets: scan commit message"
+    description: Checks the commit message for secrets
+    language: docker
+    entry: git secrets --commit_msg_hook
+    always_run: true
+    stages: [commit-msg]
+-   id: git-secrets-merge-check
+    name: "Git Secrets: merge check"
+    description: Determines if merging in a commit will introduce tainted history
+    language: docker
+    entry: git secrets --prepare_commit_msg_hook
+    always_run: true
+    pass_filenames: false
+    stages: [prepare-commit-msg]
