@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:3.10
 
 RUN apk --update add bash git less openssh make && \
     apk add --upgrade grep && \
